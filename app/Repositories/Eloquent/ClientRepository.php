@@ -34,4 +34,19 @@ class ClientRepository extends BaseRepository implements ClientRepositoryInterfa
 
         return false;
     }
+
+    /**
+     * Get all records with pagination.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function getAll(Request $request)
+    {
+        $limit = $request->get('limit', 10);
+
+        $clients = $this->model->orderByDesc('id')->paginate($limit);
+
+        return $clients;
+    }
 }

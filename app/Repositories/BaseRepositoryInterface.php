@@ -9,7 +9,7 @@ interface BaseRepositoryInterface
     /**
      * @return mixed
      */
-    public function all(Request $request);
+    public function getAll(Request $request);
 
     /**
      * @param array $data

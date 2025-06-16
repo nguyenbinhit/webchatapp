@@ -29,7 +29,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param Request $request
      * @return mixed
      */
-    public function all(Request $request)
+    public function getAll(Request $request)
     {
         $limit = $request->get('limit', 10);
 

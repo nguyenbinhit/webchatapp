@@ -3,6 +3,7 @@
 namespace App\Services\Production;
 
 use App\Models\Client;
+use App\Repositories\ClientRepositoryInterface;
 use App\Repositories\Eloquent\ClientRepository;
 use App\Services\ClientServiceInterface;
 use Illuminate\Http\Request;
@@ -15,6 +16,16 @@ class ClientService extends BaseService implements ClientServiceInterface
      * @var ClientRepository
      */
     protected $repository;
+
+    /**
+     * Constructor
+     *
+     * @param ClientRepository $repository
+     */
+    public function __construct(ClientRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
 
     /**
      * Login
@@ -37,6 +48,8 @@ class ClientService extends BaseService implements ClientServiceInterface
      */
     public function getAll(Request $request)
     {
-        return $this->repository->all($request);
+        $clients = $this->repository->getAll($request);
+
+        return $clients;
     }
 }

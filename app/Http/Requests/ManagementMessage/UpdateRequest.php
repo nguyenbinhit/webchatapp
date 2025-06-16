@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\SettingContact;
+namespace App\Http\Requests\ManagementMessage;
 
 use App\Http\Requests\BaseRequest;
 
-class CreateRequest extends BaseRequest
+class UpdateRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,9 @@ class CreateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'phone' => 'required|string',
-            'main_account' => 'nullable|url',
-            'code' => 'nullable|exists:codes,id',
-            'description' => 'nullable',
-            'key_word' => 'nullable|string',
+            'image_url' => 'nullable',
+            'account' => 'nullable',
+            'content' => 'nullable',
         ];
     }
 }

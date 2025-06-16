@@ -2,6 +2,7 @@
 
 namespace App\Services\Production;
 
+use App\Repositories\CodeRepositoryInterface;
 use App\Repositories\Eloquent\SettingContactRepository;
 use App\Repositories\SettingContactRepositoryInterface;
 use App\Services\SettingContactServiceInterface;
@@ -17,13 +18,21 @@ class SettingContactService extends BaseService implements SettingContactService
     protected $repository;
 
     /**
+     * Code Repository
+     *
+     * @var CodeRepositoryInterface
+     */
+    protected $codeRepository;
+
+    /**
      * Constructor
      *
      * @param SettingContactRepositoryInterface $repository
      */
-    public function __construct(SettingContactRepositoryInterface $repository)
+    public function __construct(SettingContactRepositoryInterface $repository, CodeRepositoryInterface $codeRepository)
     {
         $this->repository = $repository;
+        $this->codeRepository = $codeRepository;
     }
 
     /**
@@ -34,10 +43,15 @@ class SettingContactService extends BaseService implements SettingContactService
      */
     public function saveData(array $data): mixed
     {
+        $code = !empty($data['code']) ? $this->codeRepository->getByCode($data['code']) : null;
+
         $data_setting_contact = [
             'title' => $data['title'],
             'phone' => $data['phone'],
-            'redirect_url' => $data['redirect_url'] ?? null,
+            'image_url' => $data['image_url'] ?? null,
+            'main_account' => $data['main_account'] ?? null,
+            'code' => $data['code'] ?? null,
+            'code_id' => $code ? $code->id : null,
             'description' => $data['description'] ?? null,
             'key_word' => $data['key_word'] ?? null,
         ];

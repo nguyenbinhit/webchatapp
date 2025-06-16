@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SettingContactResource extends JsonResource
+class ManagementMessageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,14 +16,10 @@ class SettingContactResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'phone' => $this->phone,
             'image_url' => $this->image_url,
-            'main_account' => $this->main_account,
-            'code' => $this->code,
-            'codes' => new CodeResource($this->code_id),
-            'description' => $this->description,
-            'key_word' => $this->key_word,
+            'account' => $this->account,
+            'content' => $this->content,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

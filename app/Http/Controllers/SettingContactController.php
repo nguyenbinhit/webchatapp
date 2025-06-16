@@ -79,6 +79,12 @@ class SettingContactController extends BaseController
         try {
             $data = $request->validated();
             $data['id'] = $request->get('id', null);
+            $file = $request->file('file');
+            if ($file) {
+                $hashName = $file->hashName();
+                $path = $this->__uploadFile($file, $hashName, 'uploads/images');
+                $data['image_url'] = $path;
+            }
 
             $settingContact = $this->settingContactService->saveData($data);
 

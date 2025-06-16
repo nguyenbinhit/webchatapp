@@ -20,6 +20,19 @@ class BaseController extends Controller
     }
 
     /**
+     * Trả về một JSON response chứa thông báo lỗi và mã trạng thái.
+     *
+     * @param string $message
+     * @param int $status
+     * @param mixed $data
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function errorData($message, $status, $data): JsonResponse
+    {
+        return response()->json(['error' => $data, 'message' => $message], $status);
+    }
+
+    /**
      * Trả về một JSON response khi xóa một nguồn tài nguyên.
      *
      * @return \Illuminate\Http\JsonResponse

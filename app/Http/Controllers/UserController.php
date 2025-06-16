@@ -3,27 +3,56 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\LoginRequest;
-use App\Repositories\UserRepositoryInterface;
+use App\Http\Requests\User\UpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Services\UserServiceInterface;
 use Exception;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends BaseController
 {
-    /**
-     * @var UserRepositoryInterface
-     */
-    protected $userRepository;
-
     /**
      * @var UserServiceInterface
      */
     protected $userService;
 
-    public function __construct(UserServiceInterface $userService, UserRepositoryInterface $userRepository)
+    public function __construct(UserServiceInterface $userService)
     {
         $this->userService = $userService;
-        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * Login user
+     *
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login(LoginRequest $request)
+    {
+        try {
+            $data = $request->validated();
+
+            $result = $this->userService->login($data);
+
+            if (!$result) {
+                return $this->errorData('Login failed', 400, [
+                    'email' => 'Email không chính xác',
+                    'password' => 'Mật khẩu không chính xác'
+                ]);
+            }
+
+            $json = [
+                'user' => new UserResource($result['user']),
+                'bearer_token' => $result['bearer_token'],
+                'message' => 'Login successfully'
+            ];
+
+            return response()->json($json, 200);
+        } catch (Exception $e) {
+            return $this->internalServerError();
+        }
     }
 
     /**
@@ -52,10 +81,26 @@ class UserController extends BaseController
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param UpdateRequest $request
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
-        //
+        try {
+            $data = $request->validated();
+
+            if (isset($data['password']) && $data['password']) {
+                $data['password'] = Hash::make($data['password']);
+            }
+
+            $user = $this->userService->update($data, $id);
+
+            if (!$user) return $this->notFound();
+
+            return (new UserResource($user))->additional($this->displayMessageUpdate());
+        } catch (Exception $e) {
+            return $this->internalServerError();
+        }
     }
 
     /**
@@ -64,42 +109,5 @@ class UserController extends BaseController
     public function destroy(string $id)
     {
         //
-    }
-
-    /**
-     * Login user
-     */
-    public function login(LoginRequest $request)
-    {
-        try {
-            $data = $request->validated();
-
-            $result = $this->userService->login($data);
-
-            if (!$result) {
-                return response()->json([
-                    'message' => 'Login failed',
-                    'errors' => [
-                        'email' => [
-                            'Email or password is incorrect'
-                        ]
-                    ]
-                ], 400);
-            }
-
-            return response()->json([
-                'data' => $result,
-                'message' => 'Login successfully'
-            ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => 'Login failed',
-                'errors' => [
-                    'email' => [
-                        'Email or password is incorrect'
-                    ]
-                ]
-            ], 400);
-        }
     }
 }

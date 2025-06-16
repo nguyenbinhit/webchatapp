@@ -3,7 +3,7 @@
 namespace App\Services\Production;
 
 use App\Repositories\CodeRepositoryInterface;
-use App\Repositories\Eloquent\ClientRepository;
+use App\Repositories\Eloquent\CodeRepository;
 use App\Services\CodeServiceInterface;
 use Illuminate\Http\Request;
 
@@ -12,14 +12,14 @@ class CodeService extends BaseService implements CodeServiceInterface
     /**
      * Parameter
      *
-     * @var ClientRepository
+     * @var CodeRepository
      */
     protected $repository;
 
     /**
      * Constructor
      *
-     * @param ClientRepository $repository
+     * @param CodeRepository $repository
      */
     public function __construct(CodeRepositoryInterface $repository)
     {

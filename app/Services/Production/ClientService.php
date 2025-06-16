@@ -28,7 +28,8 @@ class ClientService extends BaseService implements ClientServiceInterface
     /**
      * Constructor
      *
-     * @param ClientRepository $repository
+     * @param ClientRepositoryInterface $repository
+     * @param CodeRepositoryInterface $codeRepository
      */
     public function __construct(ClientRepositoryInterface $repository, CodeRepositoryInterface $codeRepository)
     {

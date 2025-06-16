@@ -20,6 +20,21 @@ class ServiceBindServiceProvider extends ServiceProvider
             \App\Services\ClientServiceInterface::class,
             \App\Services\Production\ClientService::class
         );
+
+        $this->app->singleton(
+            \App\Services\CodeServiceInterface::class,
+            \App\Services\Production\CodeService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\SettingContactServiceInterface::class,
+            \App\Services\Production\SettingContactService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\ManagementMessageServiceInterface::class,
+            \App\Services\Production\ManagementMessageService::class
+        );
     }
 
     /**

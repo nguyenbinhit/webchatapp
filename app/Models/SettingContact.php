@@ -9,6 +9,8 @@ class SettingContact extends Model
 {
     use HasFactory;
 
+    protected $table = 'setting_contact';
+
     /**
      * The attributes that are mass assignable.
      *

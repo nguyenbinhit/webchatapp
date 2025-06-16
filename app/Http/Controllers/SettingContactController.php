@@ -44,7 +44,9 @@ class SettingContactController extends BaseController
     public function show()
     {
         try {
-            $settingContact = SettingContact::firstOrFail();
+            $settingContact = SettingContact::first();
+
+            if (!$settingContact) return $this->notFound();
 
             return (new SettingContactResource($settingContact))->additional($this->displayMessageSuccess());
         } catch (\Exception $e) {

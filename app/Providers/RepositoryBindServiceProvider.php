@@ -24,6 +24,21 @@ class RepositoryBindServiceProvider extends ServiceProvider
             ClientRepositoryInterface::class,
             ClientRepository::class
         );
+
+        $this->app->singleton(
+            \App\Repositories\CodeRepositoryInterface::class,
+            \App\Repositories\Eloquent\CodeRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\SettingContactRepositoryInterface::class,
+            \App\Repositories\Eloquent\SettingContactRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\ManagementMessageRepositoryInterface::class,
+            \App\Repositories\Eloquent\ManagementMessageRepository::class
+        );
     }
 
     /**

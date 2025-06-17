@@ -19,7 +19,7 @@ class ClientResource extends JsonResource
             'name' => $this->name,
             'phone' => $this->phone,
             'code' => $this->code,
-            'data_code' => new CodeResource($this->code_id),
+            'data_code' => $this->code_id == null ? new CodeResource($this->code_id) : null,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

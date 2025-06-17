@@ -3,6 +3,7 @@
 namespace App\Http\Requests\SettingContact;
 
 use App\Http\Requests\BaseRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreateRequest extends BaseRequest
 {
@@ -11,7 +12,7 @@ class CreateRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user() ? true : false;;
     }
 
     /**
@@ -24,6 +25,7 @@ class CreateRequest extends BaseRequest
         return [
             'title' => 'required|string|max:255',
             'phone' => 'required|string',
+            'image_url' => 'nullable',
             'main_account' => 'nullable|url',
             'code' => 'nullable|exists:codes,id',
             'description' => 'nullable',

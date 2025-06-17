@@ -62,11 +62,14 @@ class ManagementMessageController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param ManagementMessage $managementMessage
+     * @param $id
+     *
      * @return \Illuminate\Http\JsonResponse|ManagementMessageResource
      */
-    public function show(ManagementMessage $managementMessage)
+    public function show($id)
     {
+        $managementMessage = $this->managementMessageService->show((int)$id);
+
         return (new ManagementMessageResource($managementMessage))->additional($this->displayMessageSuccess());
     }
 
@@ -99,13 +102,13 @@ class ManagementMessageController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param ManagementMessage $managementMessage
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(ManagementMessage $managementMessage)
+    public function destroy($id)
     {
         try {
-            $managementMessage->delete();
+            $this->managementMessageService->delete((int)$id);
 
             return $this->displayDeleted();
         } catch (\Exception $e) {

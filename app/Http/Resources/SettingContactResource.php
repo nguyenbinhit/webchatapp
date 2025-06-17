@@ -21,7 +21,7 @@ class SettingContactResource extends JsonResource
             'image_url' => $this->image_url,
             'main_account' => $this->main_account,
             'code' => $this->code,
-            'codes' => new CodeResource($this->code_id),
+            'data_code' => $this->code_id == null ? new CodeResource($this->code_id) : null,
             'description' => $this->description,
             'key_word' => $this->key_word,
             'created_at' => $this->created_at,

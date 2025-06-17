@@ -20,9 +20,8 @@ Route::prefix('users')->group(function () {
 
 // Client routes
 Route::prefix('clients')->group(function () {
-    Route::post('/login', [ClientController::class, 'login']);
-
     Route::get('/', [ClientController::class, 'index'])->middleware('auth:sanctum');
+    Route::post('/login', [ClientController::class, 'login']);
 });
 
 // Code routes
@@ -35,7 +34,7 @@ Route::prefix('codes')->group(function () {
 });
 
 // Setting web contact
-Route::prefix('settings/contact')->group(function () {
+Route::prefix('setting_contacts')->group(function () {
     Route::get('/', [SettingContactController::class, 'show']);
     Route::post('/', [SettingContactController::class, 'saveData'])->middleware('auth:sanctum');
 });

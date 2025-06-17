@@ -25,7 +25,15 @@ class SettingContactController extends BaseController
      */
     public function index()
     {
-        //
+        try {
+            $settingContact = SettingContact::first();
+
+            if (!$settingContact) return $this->notFound();
+
+            return (new SettingContactResource($settingContact))->additional($this->displayMessageSuccess());
+        } catch (\Exception $e) {
+            return $this->internalServerError();
+        }
     }
 
     /**

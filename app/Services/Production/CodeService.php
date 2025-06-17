@@ -84,7 +84,7 @@ class CodeService extends BaseService implements CodeServiceInterface
      */
     public function show($id)
     {
-        return $this->repository->show($id);
+        return $this->repository->show((int) $id);
     }
 
     /**
@@ -95,6 +95,6 @@ class CodeService extends BaseService implements CodeServiceInterface
      */
     public function delete($id)
     {
-        return $this->repository->delete($id);
+        return $this->repository->delete((int) $id);
     }
 }

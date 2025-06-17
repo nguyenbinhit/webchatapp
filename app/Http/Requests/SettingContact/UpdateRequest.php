@@ -3,6 +3,7 @@
 namespace App\Http\Requests\SettingContact;
 
 use App\Http\Requests\BaseRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateRequest extends BaseRequest
 {
@@ -11,7 +12,7 @@ class UpdateRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user() ? true : false;;
     }
 
     /**

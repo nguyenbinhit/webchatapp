@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Code;
 
 use App\Http\Requests\BaseRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateRequest extends BaseRequest
 {
@@ -11,7 +12,7 @@ class UpdateRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user() ? true : false;
     }
 
     /**
@@ -23,8 +24,9 @@ class UpdateRequest extends BaseRequest
     {
         return [
             // check code is unique except for the current code
-            'code' => 'required|string|unique:codes,code,' . $this->route('code')->id,
+            'code' => 'required|string|unique:codes,code,' . $this->id,
             'status' => 'required|in:0,1',
+            'note' => 'nullable',
         ];
     }
 }

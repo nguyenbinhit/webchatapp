@@ -15,6 +15,9 @@ class Code extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        '*'
+        'id',
+        'code',
+        'note',
+        'status',
     ];
 }

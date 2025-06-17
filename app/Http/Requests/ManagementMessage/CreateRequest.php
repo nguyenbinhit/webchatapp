@@ -3,6 +3,7 @@
 namespace App\Http\Requests\ManagementMessage;
 
 use App\Http\Requests\BaseRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreateRequest extends BaseRequest
 {
@@ -11,7 +12,7 @@ class CreateRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user() ? true : false;;
     }
 
     /**
@@ -25,6 +26,7 @@ class CreateRequest extends BaseRequest
             'image_url' => 'nullable',
             'account' => 'nullable',
             'content' => 'nullable',
+            'status' => 'required',
         ];
     }
 }

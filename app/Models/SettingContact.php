@@ -17,6 +17,14 @@ class SettingContact extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        '*'
+        'id',
+        'title',
+        'phone',
+        'image_url',
+        'main_account',
+        'code',
+        'code_id',
+        'description',
+        'key_word'
     ];
 }

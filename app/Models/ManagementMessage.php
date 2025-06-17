@@ -15,6 +15,10 @@ class ManagementMessage extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        '*'
+        'id',
+        'image_url',
+        'account',
+        'content',
+        'status',
     ];
 }

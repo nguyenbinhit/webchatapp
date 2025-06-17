@@ -21,6 +21,7 @@ class ManagementMessageFactory extends Factory
             'account' => fake()->randomElement(['John', 'David']),
             'content' => fake()->paragraph(3, true),
             'status' => fake()->randomElement([0, 1]), // 0:
+            'custom_time' => null,
         ];
     }
 }

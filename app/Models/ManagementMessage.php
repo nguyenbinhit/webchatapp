@@ -20,5 +20,6 @@ class ManagementMessage extends Model
         'account',
         'content',
         'status',
+        'custom_time'
     ];
 }

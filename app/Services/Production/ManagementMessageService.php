@@ -53,6 +53,7 @@ class ManagementMessageService extends BaseService implements ManagementMessageS
             'account' => $data['account'] ?? null,
             'content' => $data['content'] ?? null,
             'status' => $data['status'], // Default to active
+            'custom_time' => $data['custom_time'] ?? null,
         ];
 
         return $this->repository->create($new_data);

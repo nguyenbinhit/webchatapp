@@ -20,6 +20,7 @@ class ManagementMessageResource extends JsonResource
             'account' => $this->account,
             'content' => $this->content,
             'status' => $this->status,
+            'custom_time' => $this->custom_time,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

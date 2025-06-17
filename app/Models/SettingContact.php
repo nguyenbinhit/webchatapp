@@ -25,6 +25,6 @@ class SettingContact extends Model
         'code',
         'code_id',
         'description',
-        'key_word'
+        'key_word',
     ];
 }

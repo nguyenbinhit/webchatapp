@@ -27,6 +27,7 @@ class CreateRequest extends BaseRequest
             'account' => 'nullable',
             'content' => 'nullable',
             'status' => 'required',
+            'custom_time' => 'nullable',
         ];
     }
 }

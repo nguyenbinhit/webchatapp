@@ -20,8 +20,9 @@ Route::prefix('users')->group(function () {
 
 // Client routes
 Route::prefix('clients')->group(function () {
-    Route::get('/', [ClientController::class, 'index'])->middleware('auth:sanctum');
     Route::post('/login', [ClientController::class, 'login']);
+    Route::get('/', [ClientController::class, 'index'])->middleware('auth:sanctum');
+    Route::delete('/{id}', [ClientController::class, 'destroy'])->middleware('auth:sanctum');
 });
 
 // Code routes

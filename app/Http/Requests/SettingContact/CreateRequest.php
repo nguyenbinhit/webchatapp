@@ -26,10 +26,10 @@ class CreateRequest extends BaseRequest
             'title' => 'required|string|max:255',
             'phone' => 'required|string',
             'file' => 'nullable',
-            'main_account' => 'nullable|url',
-            'code' => 'nullable|exists:codes,id',
+            'main_account' => 'nullable',
+            'code' => 'nullable|exists:codes,code',
             'description' => 'nullable',
-            'key_word' => 'nullable|string',
+            'key_word' => 'nullable',
         ];
     }
 }

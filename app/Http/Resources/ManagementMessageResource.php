@@ -14,9 +14,14 @@ class ManagementMessageResource extends JsonResource
      */
     public function toArray($request)
     {
+        $url = null;
+        if ($this->image_url && file_exists(public_path($this->image_url))) {
+            $url = env('APP_URL') . '/' . $this->image_url;
+        }
+
         return [
             'id' => $this->id,
-            'image_url' => $this->image_url,
+            'image_url' =>  $url,
             'account' => $this->account,
             'content' => $this->content,
             'status' => $this->status,

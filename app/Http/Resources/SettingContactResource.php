@@ -14,11 +14,16 @@ class SettingContactResource extends JsonResource
      */
     public function toArray($request)
     {
+        $url = null;
+        if ($this->image_url && file_exists(public_path($this->image_url))) {
+            $url = env('APP_URL') . '/' . $this->image_url;
+        }
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'phone' => $this->phone,
-            'image_url' => $this->image_url,
+            'image_url' => $url,
             'main_account' => $this->main_account,
             'code' => $this->code,
             'data_code' => $this->code_id == null ? new CodeResource($this->code_id) : null,

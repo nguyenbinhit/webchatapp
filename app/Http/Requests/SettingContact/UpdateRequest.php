@@ -25,7 +25,7 @@ class UpdateRequest extends BaseRequest
         return [
             'title' => 'required|string|max:255',
             'phone' => 'required|string',
-            'image_url' => 'nullable',
+            'file' => 'nullable',
             'main_account' => 'nullable|url',
             'code' => 'nullable|exists:codes,id',
             'description' => 'nullable',

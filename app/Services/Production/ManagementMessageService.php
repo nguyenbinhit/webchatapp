@@ -48,8 +48,7 @@ class ManagementMessageService extends BaseService implements ManagementMessageS
     public function create(array $data)
     {
         $new_data = [
-            'title' => $data['title'],
-            'image_url' => $data['image_url_path'] ?? null,
+            'image_url' => $data['image_url'] ?? null,
             'account' => $data['account'] ?? null,
             'content' => $data['content'] ?? null,
             'status' => $data['status'], // Default to active
@@ -69,11 +68,11 @@ class ManagementMessageService extends BaseService implements ManagementMessageS
     public function update(array $data, $id)
     {
         $new_data = [
-            'title' => $data['title'],
-            'image_url' => $data['image_url_path'] ?? null,
-            'account' => $data['account'] ?? null,
-            'content' => $data['content'] ?? null,
+            'image_url' => $data['image_url'],
+            'account' => $data['account'],
+            'content' => $data['content'],
             'status' => $data['status'], // Default to active
+            'custom_time' => $data['custom_time'],
         ];
 
         return $this->repository->update($new_data, (int) $id);

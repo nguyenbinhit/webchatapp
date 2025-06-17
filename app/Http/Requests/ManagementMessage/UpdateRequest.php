@@ -23,7 +23,8 @@ class UpdateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'image_url' => 'nullable',
+            'file' => 'nullable|file',
+            // 'image_url' => 'nullable',
             'account' => 'nullable',
             'content' => 'nullable',
             'status' => 'required',

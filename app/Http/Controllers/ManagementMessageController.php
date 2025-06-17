@@ -44,11 +44,11 @@ class ManagementMessageController extends BaseController
     {
         try {
             $data = $request->validated();
-            $file = $request->file('image_url');
+            $file = $request->file('file');
             if ($file) {
                 $hashName = $file->hashName();
                 $path = $this->__uploadFile($file, $hashName, 'uploads/images');
-                $data['image_url_path'] = $path;
+                $data['image_url'] = $path;
             }
 
             $managementMessage = $this->managementMessageService->create($data);
@@ -84,11 +84,11 @@ class ManagementMessageController extends BaseController
     {
         try {
             $data = $request->validated();
-            $file = $request->file('image_url');
+            $file = $request->file('file');
             if ($file) {
                 $hashName = $file->hashName();
                 $path = $this->__uploadFile($file, $hashName, 'uploads/images');
-                $data['image_url_path'] = $path;
+                $data['image_url'] = $path;
             }
 
             $managementMessage = $this->managementMessageService->update($data, $id);

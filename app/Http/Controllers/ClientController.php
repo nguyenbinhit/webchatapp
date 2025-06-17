@@ -93,9 +93,17 @@ class ClientController extends BaseController
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Client $client)
+    public function destroy($id)
     {
-        //
+        try {
+            $this->clientService->delete((int)$id);
+            return $this->displayDeleted();
+        } catch (\Exception $e) {
+            return $this->internalServerError();
+        }
     }
 }

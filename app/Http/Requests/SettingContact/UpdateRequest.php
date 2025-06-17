@@ -12,7 +12,7 @@ class UpdateRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return Auth::user() ? true : false;;
+        return Auth::user() ? true : false;
     }
 
     /**

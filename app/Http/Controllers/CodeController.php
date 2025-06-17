@@ -8,6 +8,7 @@ use App\Http\Resources\CodeResource;
 use App\Models\Code;
 use App\Services\CodeServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CodeController extends BaseController
 {
@@ -56,12 +57,14 @@ class CodeController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param Code $code
+     * @param $id
      * @return \Illuminate\Http\JsonResponse|CodeResource
      */
-    public function show(Code $code)
+    public function show($id)
     {
         try {
+            $code = $this->codeService->show((int) $id);
+
             return (new CodeResource($code))->additional($this->displayMessageSuccess());
         } catch (\Exception $e) {
             return $this->internalServerError();
@@ -80,7 +83,7 @@ class CodeController extends BaseController
         try {
             $data = $request->validated();
 
-            $code = $this->codeService->update($data, $id);
+            $code = $this->codeService->update($data, (int) $id);
 
             if (!$code) return $this->notFound();
 
@@ -93,13 +96,17 @@ class CodeController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param Code $code
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Code $code)
+    public function destroy($id)
     {
         try {
-            $code->delete();
+            DB::table('clients')->where('code_id', (int) $id)->update(['code_id' => null, 'code' => null]);
+
+            DB::table('setting_contact')->where('code_id', (int) $id)->update(['code_id' => null, 'code' => null]);
+
+            $this->codeService->delete((int) $id);
 
             return $this->displayDeleted();
         } catch (\Exception $e) {

@@ -71,6 +71,31 @@ class CodeService extends BaseService implements CodeServiceInterface
             'status' => $data['status'],
         ];
 
-        return $this->repository->update($update_data, $id);
+        dd($id);
+        $code = $this->repository->update($update_data, $id);
+
+        return $code ?: false;
+    }
+
+    /**
+     * Show a specific record
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    public function show($id)
+    {
+        return $this->repository->show($id);
+    }
+
+    /**
+     * Delete a record
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        return $this->repository->delete($id);
     }
 }

@@ -71,7 +71,6 @@ class CodeService extends BaseService implements CodeServiceInterface
             'status' => $data['status'],
         ];
 
-        dd($id);
         $code = $this->repository->update($update_data, $id);
 
         return $code ?: false;

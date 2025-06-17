@@ -75,6 +75,28 @@ class ManagementMessageService extends BaseService implements ManagementMessageS
             'status' => $data['status'], // Default to active
         ];
 
-        return $this->repository->update($new_data, $id);
+        return $this->repository->update($new_data, (int) $id);
+    }
+
+    /**
+     * Delete a record
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        return $this->repository->delete((int) $id);
+    }
+
+    /**
+     * Show a specific record
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    public function show($id)
+    {
+        return $this->repository->show((int) $id);
     }
 }

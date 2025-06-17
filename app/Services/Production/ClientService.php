@@ -73,4 +73,49 @@ class ClientService extends BaseService implements ClientServiceInterface
 
         return $clients;
     }
+
+    /**
+     * Create a new record
+     *
+     * @param array $data
+     * @return mixed
+     */
+    public function create(array $data)
+    {
+        return $this->repository->create($data);
+    }
+
+    /**
+     * Update an existing record
+     *
+     * @param array $data
+     * @param mixed $id
+     * @return mixed
+     */
+    public function update(array $data, $id)
+    {
+        return $this->repository->update($data, (int) $id);
+    }
+
+    /**
+     * Show a specific record
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    public function show($id)
+    {
+        return $this->repository->show((int) $id);
+    }
+
+    /**
+     * Delete a record
+     *
+     * @param mixed $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        return $this->repository->delete((int) $id);
+    }
 }

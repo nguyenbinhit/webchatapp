@@ -45,11 +45,12 @@ class ClientService extends BaseService implements ClientServiceInterface
      */
     public function login($data)
     {
+        $code = $this->codeRepository->getByCode($data['code']);
+
+        if (!$code) return false;
+
         $client = $this->repository->login($data);
-
         if (!$client) {
-            $code = $this->codeRepository->getByCode($data['code']);
-
             $client = $this->repository->create([
                 'name' => $data['name'] ?? $data['phone'],
                 'phone' => $data['phone'],

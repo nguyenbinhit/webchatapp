@@ -23,8 +23,8 @@ class CreateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'phone' => 'required|string',
+            'title' => 'nullable|string|max:255',
+            'phone' => 'nullable|string',
             'file' => 'nullable',
             'main_account' => 'nullable',
             'code' => 'nullable|exists:codes,code',

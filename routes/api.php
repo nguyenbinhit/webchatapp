@@ -38,6 +38,7 @@ Route::prefix('codes')->group(function () {
 Route::prefix('setting_contacts')->group(function () {
     Route::get('/', [SettingContactController::class, 'show']);
     Route::post('/', [SettingContactController::class, 'saveData'])->middleware('auth:sanctum');
+    Route::get('/check-code/{code}', [SettingContactController::class, 'checkCode']);
 });
 
 // Management messages
@@ -47,6 +48,14 @@ Route::prefix('management-messages')->group(function () {
     Route::get('/{id}', [ManagementMessageController::class, 'show']);
     Route::post('/{id}', [ManagementMessageController::class, 'update'])->middleware('auth:sanctum');
     Route::delete('/{id}', [ManagementMessageController::class, 'destroy'])->middleware('auth:sanctum');
+});
+
+// Message routes
+Route::prefix('messages')->group(function () {
+    Route::get('/list-by-client/{id}', [\App\Http\Controllers\MessageController::class, 'listByClient']);
+    Route::post('/', [\App\Http\Controllers\MessageController::class, 'store'])->middleware('auth:sanctum');
+    Route::put('/{id}', [\App\Http\Controllers\MessageController::class, 'update'])->middleware('auth:sanctum');
+    Route::delete('/{id}', [\App\Http\Controllers\MessageController::class, 'destroy'])->middleware('auth:sanctum');
 });
 
 // Fallback route for undefined routes

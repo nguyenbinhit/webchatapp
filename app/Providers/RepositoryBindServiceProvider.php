@@ -39,6 +39,11 @@ class RepositoryBindServiceProvider extends ServiceProvider
             \App\Repositories\ManagementMessageRepositoryInterface::class,
             \App\Repositories\Eloquent\ManagementMessageRepository::class
         );
+
+        $this->app->singleton(
+            \App\Repositories\MessageRepositoryInterface::class,
+            \App\Repositories\Eloquent\MessageRepository::class
+        );
     }
 
     /**

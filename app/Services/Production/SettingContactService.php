@@ -66,4 +66,15 @@ class SettingContactService extends BaseService implements SettingContactService
 
         return $setting_contact;
     }
+
+    /**
+     * Check if the code exists
+     *
+     * @param string $code
+     * @return mixed
+     */
+    public function checkCode(string $code)
+    {
+        return $this->repository->checkCode($code);
+    }
 }

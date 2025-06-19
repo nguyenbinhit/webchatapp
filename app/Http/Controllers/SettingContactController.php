@@ -105,4 +105,19 @@ class SettingContactController extends BaseController
             return $this->internalServerError();
         }
     }
+
+    /**
+     * Check if the code exists.
+     *
+     * @param mixed $code
+     * @return \Illuminate\Http\JsonResponse|SettingContactResource
+     */
+    public function checkCode(mixed $code)
+    {
+        $setting_contact = $this->settingContactService->checkCode($code);
+
+        if (!$setting_contact) return $this->notFound();
+
+        return (new SettingContactResource($setting_contact))->additional($this->displayMessageSuccess());
+    }
 }

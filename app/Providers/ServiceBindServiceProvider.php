@@ -35,6 +35,11 @@ class ServiceBindServiceProvider extends ServiceProvider
             \App\Services\ManagementMessageServiceInterface::class,
             \App\Services\Production\ManagementMessageService::class
         );
+
+        $this->app->singleton(
+            \App\Services\MessageServiceInterface::class,
+            \App\Services\Production\MessageService::class
+        );
     }
 
     /**

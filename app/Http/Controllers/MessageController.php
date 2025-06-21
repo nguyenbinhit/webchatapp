@@ -70,7 +70,7 @@ class MessageController extends BaseController
     public function listByClient(Request $request, $id)
     {
         $message = $this->messageService->getByClient((int) $id);
-        if (!$message) return $this->notFound();
+        if (!$message) return $this->noData();
 
         return (new MessageResource($message))->additional($this->displayMessageStore());
     }

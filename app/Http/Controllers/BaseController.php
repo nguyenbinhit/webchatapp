@@ -89,7 +89,7 @@ class BaseController extends Controller
      */
     public function noData(): JsonResponse
     {
-        return response()->json(['message' => __('notification.no_data')], Response::HTTP_OK);
+        return response()->json(['message' => __('notification.no_data'), 'data' => []], Response::HTTP_OK);
     }
 
     /**

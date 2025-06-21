@@ -16,10 +16,7 @@ class Message extends Model
      */
     protected $fillable = [
         'id',
-        'sender_id',
-        'receiver_id',
+        'management_message_id',
         'content',
-        'is_read',
-        'custom_time',
     ];
 }

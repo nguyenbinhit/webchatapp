@@ -20,16 +20,22 @@ class MessageRepository extends BaseRepository implements MessageRepositoryInter
      */
     public function getByClient($id)
     {
-        return $this->model->where(function ($query) use ($id) {
-            $query->where([
-                ['sender_id', '=', $id],
-                ['receiver_id', '=', 0]
-            ])->orWhere([
-                ['sender_id', '=', 0],
-                ['receiver_id', '=', $id]
-            ]);
-        })
-            ->orderByDesc('id')
-            ->get();
+        return $this->model->where('management_message_id', $id)->first();
+    }
+
+    /**
+     * Save data for a message
+     *
+     * @param array $data
+     * @return mixed
+     */
+    public function saveData(array $data): mixed
+    {
+        $message = $this->model->updateOrCreate(
+            ['management_message_id' => $data['management_message_id']],
+            ['content' => $data['content']]
+        );
+
+        return $message;
     }
 }

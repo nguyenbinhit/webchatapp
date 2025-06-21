@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ManagementMessage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,11 +18,8 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            'sender_id' => 0,
-            'receiver_id' => 0,
+            'management_message_id' => fake()->randomElement(ManagementMessage::pluck('id')->toArray()),
             'content' => fake()->text(200),
-            'is_read' => fake()->boolean(),
-            'custom_time' => null,
         ];
     }
 }

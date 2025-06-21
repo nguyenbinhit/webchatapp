@@ -12,4 +12,12 @@ interface MessageRepositoryInterface extends BaseRepositoryInterface {
      * @return mixed
      */
     public function getByClient($id);
+
+    /**
+     * Save data for a message
+     *
+     * @param array $data
+     * @return mixed
+     */
+    public function saveData(array $data): mixed;
 }

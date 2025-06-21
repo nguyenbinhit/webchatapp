@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\ManagementMessageController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SettingContactController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -52,10 +53,8 @@ Route::prefix('management-messages')->group(function () {
 
 // Message routes
 Route::prefix('messages')->group(function () {
-    Route::get('/list-by-client/{id}', [\App\Http\Controllers\MessageController::class, 'listByClient']);
-    Route::post('/', [\App\Http\Controllers\MessageController::class, 'store'])->middleware('auth:sanctum');
-    Route::put('/{id}', [\App\Http\Controllers\MessageController::class, 'update'])->middleware('auth:sanctum');
-    Route::delete('/{id}', [\App\Http\Controllers\MessageController::class, 'destroy'])->middleware('auth:sanctum');
+    Route::get('/list-by-client/{id}', [MessageController::class, 'listByClient']);
+    Route::post('/save-data', [MessageController::class, 'saveData'])->middleware('auth:sanctum');
 });
 
 // Fallback route for undefined routes

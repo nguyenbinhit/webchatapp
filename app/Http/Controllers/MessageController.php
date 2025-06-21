@@ -31,22 +31,10 @@ class MessageController extends BaseController
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param CreateRequest $request
-     * @return \Illuminate\Http\JsonResponse|MessageResource
      */
     public function store(CreateRequest $request)
     {
-        try {
-            $data = $request->validated();
-            $data['is_read'] = 0;
-
-            $message = $this->messageService->create($data);
-
-            return (new MessageResource($message))->additional($this->displayMessageStore());
-        } catch (\Exception $e) {
-            return $this->internalServerError();
-        }
+        //
     }
 
     /**
@@ -59,53 +47,50 @@ class MessageController extends BaseController
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param UpdateRequest $request
-     * @param mixed $id
-     * @return \Illuminate\Http\JsonResponse|MessageResource
      */
     public function update(UpdateRequest $request, $id)
     {
-        try {
-            $data = $request->validated();
-
-            $message = $this->messageService->update($data, (int) $id);
-
-            if (!$message) return $this->notFound();
-
-            return (new MessageResource($message))->additional($this->displayMessageUpdate());
-        } catch (\Exception $e) {
-            return $this->internalServerError();
-        }
+        //
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param mixed $id
-     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        try {
-            $this->messageService->delete((int) $id);
-
-            return $this->displayDeleted();
-        } catch (\Exception $e) {
-            return $this->internalServerError();
-        }
+        //
     }
 
     /**
      * List messages by client ID.
      *
      * @param int $id
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     * @return \Illuminate\Http\Resources\Json\JsonResource| \Illuminate\Http\JsonResponse
      */
     public function listByClient(Request $request, $id)
     {
-        $messages = $this->messageService->getByClient((int) $id);
+        $message = $this->messageService->getByClient((int) $id);
+        if (!$message) return $this->notFound();
 
-        return MessageResource::collection($messages)->additional($this->displayMessageSuccess());
+        return (new MessageResource($message))->additional($this->displayMessageStore());
+    }
+
+    /**
+     * Save data for the message.
+     *
+     * @param CreateRequest $request
+     * @return \Illuminate\Http\JsonResponse|MessageResource
+     */
+    public function saveData(CreateRequest $request)
+    {
+        try {
+            $data = $request->validated();
+
+            $message = $this->messageService->saveData($data);
+
+            return (new MessageResource($message))->additional($this->displayMessageStore());
+        } catch (\Exception $e) {
+            return $this->internalServerError();
+        }
     }
 }

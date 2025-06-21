@@ -23,10 +23,8 @@ class UpdateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'sender_id' => 'required',
-            'receiver_id' => 'required',
+            'management_message_id' => 'required',
             'content' => 'nullable',
-            'custom_time' => 'nullable|string',
         ];
     }
 }

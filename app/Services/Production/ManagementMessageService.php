@@ -53,6 +53,7 @@ class ManagementMessageService extends BaseService implements ManagementMessageS
             'content' => $data['content'] ?? null,
             'status' => $data['status'], // Default to active
             'custom_time' => $data['custom_time'] ?? null,
+            'is_hidden' => $data['is_hidden'] ?? 0
         ];
 
         return $this->repository->create($new_data);
@@ -73,6 +74,7 @@ class ManagementMessageService extends BaseService implements ManagementMessageS
             'content' => $data['content'],
             'status' => $data['status'], // Default to active
             'custom_time' => $data['custom_time'],
+            'is_hidden' => $data['is_hidden'] ?? 0
         ];
 
         return $this->repository->update($new_data, (int) $id);

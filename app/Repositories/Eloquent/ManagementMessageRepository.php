@@ -23,7 +23,7 @@ class ManagementMessageRepository extends BaseRepository implements ManagementMe
     {
         $limit = $request->get('limit', 10);
 
-        $clients = $this->model->orderByDesc('id')->paginate($limit);
+        $clients = $this->model->where('is_hidden', 0)->orderByDesc('id')->paginate($limit);
 
         return $clients;
     }

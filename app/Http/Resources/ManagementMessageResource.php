@@ -26,6 +26,7 @@ class ManagementMessageResource extends JsonResource
             'content' => $this->content,
             'status' => $this->status,
             'custom_time' => $this->custom_time,
+            'is_hidden' => $this->is_hidden,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

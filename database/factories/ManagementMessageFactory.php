@@ -22,6 +22,7 @@ class ManagementMessageFactory extends Factory
             'content' => fake()->paragraph(3, true),
             'status' => fake()->randomElement([0, 1]), // 0:
             'custom_time' => null,
+            'is_hidden' => 1, // 1: hidden, 0: visible
         ];
     }
 }

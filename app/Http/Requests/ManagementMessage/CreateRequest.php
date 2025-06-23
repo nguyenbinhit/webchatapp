@@ -29,6 +29,7 @@ class CreateRequest extends BaseRequest
             'content' => 'nullable',
             'status' => 'required',
             'custom_time' => 'nullable',
+            'is_hidden' => 'nullable'
         ];
     }
 }
